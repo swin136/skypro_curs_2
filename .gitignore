@@ -1,0 +1,7 @@
+/.venv
+/.idea
+/Prepare
+/apps/__pycache__
+/apps/*.log
+words.json
+get_words.py
