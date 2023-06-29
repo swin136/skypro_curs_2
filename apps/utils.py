@@ -62,7 +62,7 @@ def load_random_word():
             data = response.json()
             # Получаем случайное слово
             random_word = data[random.randint(0, len(data)-1)]
-            return basicword(random_word['word'], random_word['subwords1'])
+            return basicword(random_word['word'], random_word['subwords'])
         # Обрабатываем исключения, записваем в логи, возвращаем None
         except requests.exceptions.JSONDecodeError as error:
             log = loger(os.path.join(APPS_DIR, LOG_FILE))
