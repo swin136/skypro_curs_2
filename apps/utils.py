@@ -69,26 +69,24 @@ def load_random_word():
             log.write_log(f"При чтении данных JSON с ресурса {URL_SRC} возникла ошибка: "
                           f"{type(error).__name__} >>> модуль {inspect.stack()[0][1]}: "
                           f"функция {inspect.stack()[0][3]}: строка {inspect.stack()[0][2]}")
-            return
+
         except TypeError as terror:
             log = loger(os.path.join(APPS_DIR, LOG_FILE))
             log.write_log(f"При преобразовании JSON-данных с ресурса {URL_SRC} возникла ошибка: "
                           f"{type(terror).__name__} >>> модуль {inspect.stack()[0][1]}: "
                           f"функция {inspect.stack()[0][3]}: строка {inspect.stack()[0][2]}")
-            return
 
         except KeyError as keyerror:
             log = loger(os.path.join(APPS_DIR, LOG_FILE))
             log.write_log(f"Ошибка доступа к словарю с вопросами! "
                           f"{type(keyerror).__name__} >>> модуль {inspect.stack()[0][1]}: "
                           f"функция {inspect.stack()[0][3]}: строка {inspect.stack()[0][2]}")
-            return
 
-    print(f'Ошибка доступа к JSON-ресурсу {URL_SRC}')
-    return
+    else:
+        print(f'Ошибка доступа к JSON-ресурсу {URL_SRC}')
 
 
-def hello_msg(username, testword, count_subwords):
+def hello_msg(username, testword, count_subwords) -> None:
     """
     Выводим привественное параметризированное сообщение пользователю.
     :param username: имя пользователя
