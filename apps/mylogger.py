@@ -19,7 +19,7 @@ class MyLoger:
         self._file_log = file_log
         self._type_msg = ("Error", "Info", "Debug")
 
-    def get_filelog(self):
+    def get_filelog(self) -> str:
         """
         Возвращает имя файла для логировния
         :return:
@@ -37,14 +37,14 @@ class MyLoger:
         except IndexError:
             return self._type_msg[0]
 
-    def is_print_console(self):
+    def is_print_console(self) -> bool:
         """
         Возвращает значение флага показа сообщений лога в консоли
         :return:
         """
         return self._is_print
 
-    def write_log(self, log_msg: str, index_msg=0):
+    def write_log(self, log_msg: str, index_msg=0) -> None:
         """
         Пишет лог ошибки(сообщения в файл). Может также выводить текст на консоль.
         :param log_msg: сообщение лога

@@ -7,18 +7,18 @@ class BasicWord:
         self._src_word = src_word
         self._subwords = [item.strip() for item in subwords if item.strip() != 'стоп']
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"Слово для проверки '{self.src_word}', количество подслов - {self.count_subwords}"
 
-    def check_word(self, testword: str):
+    def check_word(self, testword: str) -> bool:
         """Возращает ИСТИНА если слово уже есть в списке подслов"""
         return testword in self._subwords
 
-    def get_count_subwords(self):
+    def get_count_subwords(self) -> int:
         """Возвращает количесво элементов в списке подслов"""
         return len(self._subwords)
 
-    def get_src_word(self):
+    def get_src_word(self) -> str:
         """Возвращает слово для тестирования"""
         return self._src_word
 

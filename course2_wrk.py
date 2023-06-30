@@ -1,9 +1,11 @@
+import time
+
 from apps import player
 from apps.utils import load_random_word
 from apps.utils import hello_msg
 
 
-def main():
+def main() -> None:
     """Реализована бизнес-логика приложения"""
     # Загружаем слово для тестирования
     test_word = load_random_word()
@@ -24,33 +26,39 @@ def main():
     session = player(username)
 
     # Начинаем цикл опроса пользователя
-    while True:
-        userword = input('Введите слово >>> ').strip().lower()
-        # Пользователь ввел комбинация для выхода из цикла
-        if userword == 'стоп' or userword == 'stop':
-            break
-        # Пользователь ввел слишко короткое слово
-        if len(userword) < 3:
-            print('Слишком короткое слово!')
-            continue
-
-        # Пользователь ввел слово повторно
-        if session.check_word(userword):
-            print(f"Слово {userword.upper()} уже использовано!")
-            continue
-        # Пользователь угадал слово
-        if test_word.check_word(userword):
-            print('Верно!')
-            session.add_subword(userword)
-            # Пользователь угадал все слова
-            if session.use_words_count == test_word.count_subwords:
-                # Идем на завершение цикла опроса
+    try:
+        while True:
+            userword = input('Введите слово >>> ').strip().lower()
+            # Пользователь ввел комбинация для выхода из цикла
+            if userword == 'стоп' or userword == 'stop':
                 break
-            else:
+            # Пользователь ввел слишко короткое слово
+            if len(userword) < 3:
+                print('Слишком короткое слово!')
                 continue
-        else:
-            print('Неверно!')
-            continue
+
+            # Пользователь ввел слово повторно
+            if session.check_word(userword):
+                print(f"Слово {userword.upper()} уже использовано!")
+                continue
+            # Пользователь угадал слово
+            if test_word.check_word(userword):
+                print('Верно!')
+                session.add_subword(userword)
+                # Пользователь угадал все слова
+                if session.use_words_count == test_word.count_subwords:
+                    # Идем на завершение цикла опроса
+                    break
+                else:
+                    continue
+            else:
+                print('Неверно!')
+                continue
+    except KeyboardInterrupt:
+        # Пользователь нажал CTRL-F2 - обрабатываем аварийное завершение программы
+        print('До свидания ...')
+        time.sleep(2)
+        return
     # Выводим статистику игры перед завершеним работы программы
     print(f'Игра завершена, Вы угадали {session.use_words_count} слов!')
 
